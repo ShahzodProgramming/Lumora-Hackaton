@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 
 const LoginPage = () => {
-  const [username, setUser]
 
 
   useEffect(() => {
