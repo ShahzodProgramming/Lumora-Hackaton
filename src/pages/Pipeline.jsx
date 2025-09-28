@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PipelineCard from "../components/PipelineCard";
+import Navbar from "../components/Navbar";
 
 const Pipeline = () => {
   const [pipelineData, setpipelineData] = useState([]);
@@ -34,16 +35,19 @@ const Pipeline = () => {
   }, []);
 
   return (
-    <div className="p-8 bg-gray-50 min-h-screen">
-      <h1 className="text-3xl font-bold mb-8 text-center">
-        Pipeline - List of Start-Ups
-      </h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {pipelineData.map((startup, idx) => (
-          <PipelineCard key={idx} {...startup} />
-        ))}
+    <>
+      <Navbar />
+      <div className="p-8 bg-gray-50 min-h-screen">
+        <h1 className="text-3xl font-bold mb-8 text-center">
+          Pipeline - List of Start-Ups
+        </h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {pipelineData.map((startup, idx) => (
+            <PipelineCard key={idx} {...startup} />
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
