@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Inter";
+  font-weight: 700;
+  src: url(./assets/fonts/Inter_24pt-Bold.ttf);
+}
+@font-face {
+  font-family: "Inter";
+  font-weight: 900;
+  src: url(./assets/fonts/Inter_24pt-ExtraBold.ttf);
+}
+
+@font-face {
+  font-family: "Inter";
+  font-weight: 500;
+  src: url(./assets/fonts/Inter_24pt-Medium.ttf);
+}
+
+
+@font-face {
+  font-family: "Inter";
+  font-weight: 300;
+  src: url(./assets/fonts/Inter_24pt-Thin.ttf);
+}
