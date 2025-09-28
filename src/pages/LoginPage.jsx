@@ -1,11 +1,39 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 const LoginPage = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
+  const send = (e) => {
+    e.preventDefault();
+    fetch("http://192.168.1.182:5000/login", {
+      // Replace with your API URL
+      method: "POST", // HTTP method
+      headers: {
+        "Content-Type": "application/json", // Sending JSON
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not OK");
+        }
 
-  useEffect(() => {
-    fetch('')
-  }, []);
+        return response.json(); // Parse JSON response if any
+      })
+      .then((data) => {
+        console.log("Success:", data);
+        const token = data.msg;
+        console.log(token);
+        localStorage.setItem('token',token)
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
 
   return (
     <div className="big-ass-wrapper w-[100%] h-screen flex justify-center items-center">
@@ -15,6 +43,8 @@ const LoginPage = () => {
           <div className="form-wrapper flex flex-col w-full transition-all">
             <label>Username</label>
             <input
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               className="border-3 rounded outline-0 py-2 px-5 border-gray-300 transition-all focus:border-greenish focus:bg-white"
               type="text"
               name="Username"
@@ -25,13 +55,18 @@ const LoginPage = () => {
           <div className="form-wrapper flex flex-col w-full transition-all">
             <label>Password</label>
             <input
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="border-3 rounded outline-0 py-2 px-5 border-gray-300 transition-all focus:border-greenish focus:bg-white"
               type="password"
               name="Password"
               placeholder="Enter your password"
             />
           </div>
-          <button className="bg-[#8DD3BB] p-3 rounded w-30 hover:shadow-xl hover:bg-[#7bb7a2] hover:text-white transition">
+          <button
+            onClick={send}
+            className="bg-[#8DD3BB] p-3 rounded w-30 hover:shadow-xl hover:bg-[#7bb7a2] hover:text-white transition"
+          >
             Confirm
           </button>
         </form>
